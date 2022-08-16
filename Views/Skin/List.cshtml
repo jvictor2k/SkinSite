@@ -6,13 +6,7 @@
     <div class="row">
         @foreach (var skin in Model.Skins)
         {
-            <div class="col-sm-4 col-md-4 col-lg-4">
-                <h3>@skin.Tipo - @skin.Nome</h3>
-                <h5>@skin.Estado</h5>
-                <h7> 0.@skin.SkinFloat</h7>
-                <div><img src="@skin.ImagemUrl" width=100%></div>
-                <p>@skin.Preco.ToString("c")</p>
-            </div>
+            <partial name="_SkinsResumo" for="@skin"/>
         }
     </div>
 </div>
