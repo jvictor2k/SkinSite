@@ -6,6 +6,6 @@ namespace SkinsSite.Repositories.Interfaces
     {
         IEnumerable<Skin> Skins { get; }
         IEnumerable<Skin> SkinsPreferidas { get; }
-        Skin GetSkinId(int lancheId);
+        Skin GetSkinId(int skinId);
     }
 }
