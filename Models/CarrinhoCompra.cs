@@ -18,7 +18,7 @@ namespace SkinsSite.Models
         }
 
         public string CarrinhoCompraId { get; set; }
-        public List<CarrinhoCompraItem> CarrinhoCompraItems { get; set; }
+        public List<CarrinhoCompraItem> CarrinhoCompraItens { get; set; }
 
         public static CarrinhoCompra GetCarrinho(IServiceProvider services)
         {
@@ -41,6 +41,29 @@ namespace SkinsSite.Models
                 CarrinhoCompraId = carrinhoId
 
             };
+        }
+
+        public void AdicionarAoCarrinho(Skin skin)
+        {
+            var carrinhoCompraItem = _context.CarrinhoCompraItens.SingleOrDefault(
+                s => s.Skin.SkinId == skin.SkinId &&
+                s.CarrinhoCompraId == CarrinhoCompraId);
+
+            if(carrinhoCompraItem == null)
+            {
+                carrinhoCompraItem = new CarrinhoCompraItem
+                {
+                    CarrinhoCompraId = CarrinhoCompraId,
+                    Skin = skin,
+                    Quantidade = 1
+                };
+                _context.CarrinhoCompraItens.Add(carrinhoCompraItem);
+            }
+            else
+            {
+                carrinhoCompraItem.Quantidade++;
+            }
+            _context.SaveChanges();
         }
     }
 }
